@@ -1,0 +1,64 @@
+<div class="container-fluid">
+  <div class="col-12">
+    <h3 class="text-info">Board Name : {{ boardname }}</h3>
+    <ul class=" list-inline row" cdkDropListGroup>
+      <li
+        cdkDropList
+        [cdkDropListData]="card"
+        (cdkDropListDropped)="onDrop($event)"
+        *ngFor="let card of cards; let i = index"
+        class="col-3"
+        style="margin-bottom:20px;"
+      >
+        <div class="border border-info rounded p-3">
+          <span
+            (click)="deleteCard(i, card.id)"
+            class="float-right"
+            style="position:relative; bottom:15px; left:10px"
+          >
+            <i class="fa fa-times fa-1x"></i>
+          </span>
+          <div class="form-group" *ngIf="card.name">
+            <h6 class="text-info text-center card-Title" *ngIf="card.name">
+              {{ card.name }}
+            </h6>
+          </div>
+          <div class="form-group" *ngIf="!card.name">
+            <input
+              class="form-control"
+              placeholder="Card Title"
+              type="text"
+              (keyup.enter)="cardTitleAdd($event, i, item)"
+            />
+          </div>
+          <div *ngIf="cardlist[i]">
+            <div
+              cdkDrag
+              [ngClass]="item.done"
+              *ngFor="let item of card.tickets; let j = index"
+              class="innerCard"
+            >
+              {{ item.cardtext }}
+              <span (click)="remove(j, i)" class="float-right"
+                ><i class="fa fa-times fa-1x"></i
+              ></span>
+              <span (click)="done(j)" class="float-right"></span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="cardtext"
+              (keyup.enter)="onKey(i, $event, j, card)"
+              placeholder="Add Card"
+            />
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div>
+      <button type="button" class="btn  btn-info" (click)="addCard(i)">
+        <i class="fa fa-plus fa-1x"></i> Add a List
+      </button>
+    </div>
+  </div>
+</div>

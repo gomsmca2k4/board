@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+header {
+  background: white;
+  height: 100px;
+  padding: 20px;
+  vertical-align: middle;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+body {
+  background: #e9ecef;
+}
+
+footer {
+  background: black;
+  height: 20px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
