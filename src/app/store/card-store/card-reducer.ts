@@ -1,31 +1,26 @@
-import { Actions, ActionTypes } from './card-actions';
-import { featureAdapter, initialState, State } from './card-state';
+/** New Implementations */
+import { Action, createReducer, on } from '@ngrx/store';
+import * as cartActions from './card-actions';
+import { initialState, State } from './card-state';
 
-export function featureReducer(state = initialState, action: Actions): State {
-  switch (action.type) {
-    case ActionTypes.CREATE: {
-    return featureAdapter.addAll(action.payload.items, {
-        ...state,
-        isLoading: true,
-        error: null
-      });
-    }
-    case ActionTypes.UPDATE: {
-      return featureAdapter.addAll(action.payload.items, {
-        ...state,
-        isLoading: false,
-        error: null
-      });
-    }
-    case ActionTypes.DELETE: {
-      return {
-        ...state,
-        isLoading: false,
-        error: null
-      };
-    }
-    default: {
-      return state;
-    }
-  }
+const cardReducer = createReducer(
+  initialState,
+  on(cartActions.createCard, createCard),
+  on(cartActions.deleteCard, deleteCard),
+);
+
+function createCard(state) {
+  console.log('createCard');
+  return { ...state, name: state.nome, id: state.id, tasks: state.tasks };
+};
+
+function deleteCard(state) {
+  console.log('deleteCard');
+  return { ...state, id: state.id };
+};
+
+export function reducer(state: State | undefined, action: Action) {
+  return cardReducer(state, action);
 }
+
+export const cardFeatureKey = 'card';

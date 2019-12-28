@@ -12,6 +12,8 @@ import { CreateBoardComponent } from "./feature/create-board/create-board.compon
 import { BoardListComponent } from "./feature/board-list/board-list.component";
 import { TrelloBoardService } from "./data/trello-board.service";
 import { RootStoreModule } from './root-store/root-store.module';
+import { CardStoreModule } from './store/card-store/card-store.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -27,9 +29,10 @@ import { RootStoreModule } from './root-store/root-store.module';
     DragDropModule,
     FormsModule,
     ReactiveFormsModule,
-    RootStoreModule
+    RootStoreModule,
+    StoreModule.forRoot({}),
+    CardStoreModule
   ],
-
   providers: [TrelloBoardService],
   bootstrap: [AppComponent]
 })

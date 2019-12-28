@@ -7,7 +7,8 @@ import {
 import { ICard } from "../../model/ICard";
 import { ITask, STATE } from "../../model/ITask";
 import { ActivatedRoute } from "@angular/router";
-import { State } from '@ngrx/store';
+import { Store } from '@ngrx/store';
+import { createCard, deleteCard } from '../../store/card-store/card-actions';
 
 @Component({
   selector: "app-board-list",
@@ -19,9 +20,12 @@ export class BoardListComponent implements OnInit, OnDestroy {
   list: Array<ITask> = [];
   boardName;
   connectedTo = [];
+  private uniqueId = 0;
+
   constructor(
     private route: ActivatedRoute,
-    private ngzone: NgZone
+    private ngZone: NgZone,
+    private store: Store<ICard>
   ) {
     this.boardName = this.route.snapshot.params.id;
   }
@@ -29,10 +33,10 @@ export class BoardListComponent implements OnInit, OnDestroy {
   newDynamic: any = {};
   newInnerCard: any = {};
   cards: Array<ICard> = [];
-  cardList: boolean[] = [];
+  cardList: Array<boolean> = [];
 
   ngOnInit(): void {
-    this.newDynamic = { card: "" };
+    this.newDynamic = { card: '' };
   }
 
   getBoardList() { }
@@ -78,31 +82,33 @@ export class BoardListComponent implements OnInit, OnDestroy {
   }
 
   addCard() {
+    this.uniqueId++;
     this.list = [];
-    this.ngzone.run(() => {
-      const card: ICard = {
-        name: "",
-        tasks: [],
-        id: 0
-      };
+    const card: ICard = {
+      name: "",
+      tasks: [],
+      id: this.uniqueId
+    };
+    this.ngZone.run(() => {
       this.cards.push(card);
+      this.store.dispatch(createCard(card));
     });
     return true;
   }
 
   deleteCard(index, id) {
-    if (this.cards.length === 0) {
-      return false;
-    } else {
+    if (this.cards.length !== 0) {
       this.cards.splice(index, 1);
+      this.store.dispatch(deleteCard(id))
       return true;
     }
   }
 
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
+      const id = event.container.data.id;
       moveItemInArray(
-        this.cards[event.container.data.id].tasks,
+        this.cards[id].tasks,
         event.previousIndex,
         event.currentIndex
       );

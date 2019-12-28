@@ -8,12 +8,15 @@ export const featureAdapter: EntityAdapter<ICard> = createEntityAdapter<ICard>({
 });
 
 export interface State extends EntityState<ICard> {
-  isLoading?: boolean;
-  error?: any;
-}
+    isLoading: false,
+    error: null
+  }
 
 export const initialState: State = featureAdapter.getInitialState(
   {
+    name: '',
+    id: 0,
+    tasks: [],
     isLoading: false,
     error: null
   }
