@@ -85,9 +85,7 @@ export class BoardListComponent implements OnInit, OnDestroy {
         tasks: [],
         id: 0
       };
-      this.cards.push({
-        card
-      });
+      this.cards.push(card);
     });
     return true;
   }
