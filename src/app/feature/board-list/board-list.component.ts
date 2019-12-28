@@ -7,6 +7,7 @@ import {
 import { ICard } from "../../model/ICard";
 import { ITask, STATE } from "../../model/ITask";
 import { ActivatedRoute } from "@angular/router";
+import { State } from '@ngrx/store';
 
 @Component({
   selector: "app-board-list",
@@ -27,7 +28,7 @@ export class BoardListComponent implements OnInit, OnDestroy {
 
   newDynamic: any = {};
   newInnerCard: any = {};
-  cards: any = [];
+  cards: Array<ICard> = [];
   cardList: boolean[] = [];
 
   ngOnInit(): void {
@@ -47,20 +48,18 @@ export class BoardListComponent implements OnInit, OnDestroy {
     this.cards[index] = obj;
   }
 
-  onKey(index1, event, item) {
+  addTask(cardIndex, event, item) {
     const inputValue = event.target.value;
-    this.list = this.cards[index1].tasks;
+    this.list = this.cards[cardIndex].tasks;
     this.list.push({
       cardText: inputValue,
-      id: this.cards[index1].tasks.length + 1
+      id: this.cards[cardIndex].tasks.length + 1,
+      state: STATE.ACTIVE
     });
-    this.cards[index1].tasks = [];
-    this.cards[index1].tasks = this.list;
+    this.cards[cardIndex].tasks = this.list;
     event.target.value = "";
 
-    for (const card of this.cards) {
-      this.connectedTo.push(card.id);
-    }
+    this.connectedTo = this.cards.map(card => card.id);
   }
 
   add(textInput, event) {

@@ -21,14 +21,14 @@
       </div>
 
       <div *ngIf="cardList[cardIndex]">
-        <div cdkDrag [ngClass]="item.done" *ngFor="let item of card.tickets; let itemIndex = index" class="innerCard">
-          {{ item.cardtext }}
+        <div cdkDrag [ngClass]="item.done" *ngFor="let item of card.tasks; let itemIndex = index" class="innerCard">
+          {{ item.cardText }}
           <span (click)="remove(itemIndex, cardIndex)" class="close">
             <mat-icon color="primary">clear</mat-icon>
           </span>
           <span (click)="done(itemIndex)"></span>
         </div>
-        <input type="text" ngDefaultControl matInput id="cardtext" (keyup.enter)="onKey(cardIndex, $event, card)"
+        <input type="text" ngDefaultControl matInput id="cardtext" (keyup.enter)="addTask(cardIndex, $event, card)"
           placeholder="Add Card" />
       </div>
     </mat-card>
