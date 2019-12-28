@@ -1,64 +1,35 @@
-<div class="container-fluid">
-  <div class="col-12">
-    <h3 class="text-info">Board Name : {{ boardname }}</h3>
-    <ul class=" list-inline row" cdkDropListGroup>
-      <li
-        cdkDropList
-        [cdkDropListData]="card"
-        (cdkDropListDropped)="onDrop($event)"
-        *ngFor="let card of cards; let i = index"
-        class="col-3"
-        style="margin-bottom:20px;"
-      >
-        <div class="border border-info rounded p-3">
-          <span
-            (click)="deleteCard(i, card.id)"
-            class="float-right"
-            style="position:relative; bottom:15px; left:10px"
-          >
-            <i class="fa fa-times fa-1x"></i>
-          </span>
-          <div class="form-group" *ngIf="card.name">
-            <h6 class="text-info text-center card-Title" *ngIf="card.name">
-              {{ card.name }}
-            </h6>
-          </div>
-          <div class="form-group" *ngIf="!card.name">
-            <input
-              class="form-control"
-              placeholder="Card Title"
-              type="text"
-              (keyup.enter)="cardTitleAdd($event, i, item)"
-            />
-          </div>
-          <div *ngIf="cardlist[i]">
-            <div
-              cdkDrag
-              [ngClass]="item.done"
-              *ngFor="let item of card.tickets; let j = index"
-              class="innerCard"
-            >
-              {{ item.cardtext }}
-              <span (click)="remove(j, i)" class="float-right"
-                ><i class="fa fa-times fa-1x"></i
-              ></span>
-              <span (click)="done(j)" class="float-right"></span>
+<div>
+    <h3 class="text-info">Board Name : {{boardname}}</h3>
+    <div style="width:100%">
+        <mat-card id="{{card.id}}" cdkDropList [cdkDropListData]="card" (cdkDropListDropped)="drop($event)" *ngFor="let card of cards; let i = index;">
+
+            <span (click)="deleteCard(i,card.id)" style="position:relative; bottom:15px; left:10px;float:right">
+                     <mat-icon color="accent">clear</mat-icon>
+         </span>
+
+            <div class="form-group" *ngIf="card.name">
+                <h4 class="text-info text-center card-Title" *ngIf="card.name"> {{card.name}}</h4>
             </div>
-            <input
-              type="text"
-              class="form-control"
-              id="cardtext"
-              (keyup.enter)="onKey(i, $event, j, card)"
-              placeholder="Add Card"
-            />
-          </div>
-        </div>
-      </li>
-    </ul>
-    <div>
-      <button type="button" class="btn  btn-info" (click)="addCard(i)">
-        <i class="fa fa-plus fa-1x"></i> Add a List
-      </button>
+            <div class="form-group" *ngIf="!card.name">
+                <mat-form-field appearance="standard" color="accent">
+                    <input ngDefaultControl matInput placeholder="Card Title" type="text" (keyup.enter)="cardTitleAdd($event,i)" />
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="cardlist[i]">
+                <div cdkDrag [ngClass]="item.done" *ngFor="let item of card.tickets;let j = index" class="innerCard">
+                    {{item.cardtext}}
+                    <span (click)="remove(j,i)" class="close"><mat-icon color="accent">clear</mat-icon></span>
+                    <span (click)="done(j)"></span>
+                </div>
+                <input type="text" ngDefaultControl matInput id="cardtext" (keyup.enter)="onKey(i,$event,card)" placeholder="Add Card">
+            </div>
+
+
+        </mat-card>
     </div>
-  </div>
+    <mat-card-actions>
+        <button mat-stroked-button color="accent" (click)="addCard()"> <i class="fa fa-plus fa-1x"></i> Add a List
+            </button>
+    </mat-card-actions>
 </div>

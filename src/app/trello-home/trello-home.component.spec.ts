@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoardListComponent } from './board-list.component';
+import { TrelloHomeComponent } from './trello-home.component';
 
-describe('BoardListComponent', () => {
-  let component: BoardListComponent;
-  let fixture: ComponentFixture<BoardListComponent>;
+describe('TrelloHomeComponent', () => {
+  let component: TrelloHomeComponent;
+  let fixture: ComponentFixture<TrelloHomeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoardListComponent ]
+      declarations: [ TrelloHomeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoardListComponent);
+    fixture = TestBed.createComponent(TrelloHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
