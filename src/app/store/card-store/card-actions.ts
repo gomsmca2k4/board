@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction } from '@ngrx/store';
 import { ICard } from 'src/app/model/ICard';
 
 export enum ActionTypes {
@@ -22,3 +22,7 @@ constructor(public payload: { items: ICard[] }) {};
 }
 
 export type Actions = CreateCardAction | UpdateCardAction | DeleteCardAction;
+
+export const createCardAction = createAction('[Card Feature] Create Card');
+export const deleteCardAction = createAction('[Card Feature] Delete Card');
+export const updateCardAction = createAction('[Card Feature] Update Card');

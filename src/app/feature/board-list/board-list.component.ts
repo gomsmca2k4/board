@@ -39,9 +39,9 @@ export class BoardListComponent implements OnInit, OnDestroy {
   cardTitleAdd(event, index) {
     this.cardList[index] = true;
     const inputValue = event.target.value;
-    const obj = {
+    const obj: ICard = {
       name: inputValue,
-      tickets: [],
+      tasks: [],
       id: index
     };
     this.cards[index] = obj;
@@ -49,13 +49,13 @@ export class BoardListComponent implements OnInit, OnDestroy {
 
   onKey(index1, event, item) {
     const inputValue = event.target.value;
-    this.list = this.cards[index1].tickets;
+    this.list = this.cards[index1].tasks;
     this.list.push({
       cardText: inputValue,
-      id: this.cards[index1].tickets.length + 1
+      id: this.cards[index1].tasks.length + 1
     });
-    this.cards[index1].tickets = [];
-    this.cards[index1].tickets = this.list;
+    this.cards[index1].tasks = [];
+    this.cards[index1].tasks = this.list;
     event.target.value = "";
 
     for (const card of this.cards) {
@@ -73,8 +73,8 @@ export class BoardListComponent implements OnInit, OnDestroy {
   }
 
   remove(id, cardIndex) {
-    this.list = this.cards[cardIndex].tickets;
-    this.cards[cardIndex].tickets = this.list;
+    this.list = this.cards[cardIndex].tasks;
+    this.cards[cardIndex].tasks = this.list;
     this.list.splice(id, 1);
   }
 
@@ -105,7 +105,7 @@ export class BoardListComponent implements OnInit, OnDestroy {
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
-        this.cards[event.container.data.id].tickets,
+        this.cards[event.container.data.id].tasks,
         event.previousIndex,
         event.currentIndex
       );
