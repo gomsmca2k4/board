@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class CreateBoardComponent implements OnInit {
   boardName: string;
   editBoardName: string;
-  angForm: FormGroup;
+  boardForm: FormGroup;
   constructor(
     private router: Router,
     private trelloBoardService: TrelloBoardService,
@@ -19,18 +19,17 @@ export class CreateBoardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.trelloBoardService.cast.subscribe(boardName=> this.boardName = boardName);
     this.createForm();
   }
 
   createForm() {
-    this.angForm = this.formbuilder.group({
+    this.boardForm = this.formbuilder.group({
       BoardName: ["", Validators.required]
     });
   }
 
   get boardNamefromForm(): any {
-    return this.angForm.get("BoardName");
+    return this.boardForm.get("BoardName");
   }
 
   createBoard() {

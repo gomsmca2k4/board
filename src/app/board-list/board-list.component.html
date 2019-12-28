@@ -1,5 +1,5 @@
 <div class="main-wrapper">
-  <h3 class="text-info">{{ boardname }}</h3>
+  <h3 class="text-info">{{ boardName }}</h3>
   <div>
     <mat-card id="{{ card.id }}" cdkDropList [cdkDropListData]="card" (cdkDropListDropped)="drop($event)"
       *ngFor="let card of cards; let i = index">
@@ -33,9 +33,7 @@
       </div>
     </mat-card>
   </div>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="addCard()">
-      <i class="fa fa-plus fa-1x"></i> Add a List
-    </button>
-  </mat-card-actions>
+  <button mat-raised-button color="primary" (click)="addCard()">
+    <i class="fa fa-plus fa-1x"></i> Add a List
+  </button>
 </div>

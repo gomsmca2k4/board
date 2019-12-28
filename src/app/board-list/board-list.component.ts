@@ -17,14 +17,14 @@ import { ActivatedRoute } from "@angular/router";
 export class BoardListComponent implements OnInit, OnDestroy {
   cardNamelist = [];
   list = [];
-  boardname;
+  boardName;
   connectedTo = [];
   constructor(
     private formbuilder: FormBuilder,
     private route: ActivatedRoute,
     private ngzone: NgZone
   ) {
-    this.boardname = this.route.snapshot.params.id;
+    this.boardName = this.route.snapshot.params.id;
   }
 
   // dynamicArray: Array<DynamicDashboardGrid> = [];

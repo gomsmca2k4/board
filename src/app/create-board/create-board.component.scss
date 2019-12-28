@@ -10,3 +10,11 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 @include mat-core-theme($candy-app-theme);
 @include mat-button-theme($candy-app-theme);
 @include mat-checkbox-theme($candy-app-theme);
+
+.createBoardForm {
+    margin: 0 auto;
+    max-width: 400px;
+    mat-form-field {
+        width: 100%;
+    }
+}

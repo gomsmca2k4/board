@@ -6,7 +6,12 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./trello-home.component.scss"]
 })
 export class TrelloHomeComponent implements OnInit {
-  constructor() {}
+  isBoarFormVisible = true; //
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  public showBoardForm() {
+    this.isBoarFormVisible = true;
+  }
 }
