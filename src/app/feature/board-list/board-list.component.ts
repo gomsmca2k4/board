@@ -3,10 +3,9 @@ import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import {
   CdkDragDrop,
   moveItemInArray,
-  transferArrayItem
 } from "@angular/cdk/drag-drop";
 
-import { IName, ICard, ITicket } from "./Iboardlist";
+import { ICard } from "../../model/IboardList";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -20,7 +19,6 @@ export class BoardListComponent implements OnInit, OnDestroy {
   boardName;
   connectedTo = [];
   constructor(
-    private formbuilder: FormBuilder,
     private route: ActivatedRoute,
     private ngzone: NgZone
   ) {
@@ -37,7 +35,7 @@ export class BoardListComponent implements OnInit, OnDestroy {
     this.newDynamic = { card: "" };
   }
 
-  getBoardList() {}
+  getBoardList() { }
 
   cardTitleAdd(event, index) {
     this.cardlist[index] = true;
@@ -118,5 +116,5 @@ export class BoardListComponent implements OnInit, OnDestroy {
       );
     }
   }
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 }
