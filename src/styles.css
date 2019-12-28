@@ -5,6 +5,11 @@ body {
   height: 100%;
 }
 body {
+  background-color: #f2f2f2;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.main-wrapper {
+  padding: 0 15px;
 }

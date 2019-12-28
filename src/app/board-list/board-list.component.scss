@@ -3,10 +3,15 @@ mat-card {
   margin: 1%;
   float: left;
 }
+.btnDeleteCard {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 mat-card-actions {
-  width: 100%;
   float: left;
   padding: 0px;
+  width: 100%;
 }
 .mat-form-field-appearance-standard .mat-form-field-flex {
   padding: 0px;
