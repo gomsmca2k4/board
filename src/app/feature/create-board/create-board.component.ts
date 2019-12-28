@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Routes, Router, RouterModule } from "@angular/router";
-import { TrelloBoardService } from "../trello-board.service";
+import { Router } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
@@ -14,7 +13,6 @@ export class CreateBoardComponent implements OnInit {
   boardForm: FormGroup;
   constructor(
     private router: Router,
-    private trelloBoardService: TrelloBoardService,
     private formbuilder: FormBuilder
   ) {}
 

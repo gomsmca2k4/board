@@ -8,10 +8,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 
 import { AppComponent } from "./app.component";
-import { TrelloHomeComponent } from "./trello-home/trello-home.component";
-import { CreateBoardComponent } from "./create-board/create-board.component";
-import { BoardListComponent } from "./board-list/board-list.component";
-import { TrelloBoardService } from "./trello-board.service";
+import { TrelloHomeComponent } from "./feature/trello-home/trello-home.component";
+import { CreateBoardComponent } from "./feature/create-board/create-board.component";
+import { BoardListComponent } from "./feature/board-list/board-list.component";
+import { TrelloBoardService } from "./data/trello-board.service";
+import { RootStoreModule } from './root-store/root-store.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TrelloBoardService } from "./trello-board.service";
     MaterialModule,
     DragDropModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RootStoreModule
   ],
 
   providers: [TrelloBoardService],
