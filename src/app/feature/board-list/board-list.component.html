@@ -2,9 +2,9 @@
   <h3 class="text-info">{{ boardName }}</h3>
   <div>
     <mat-card id="{{ card.id }}" cdkDropList [cdkDropListData]="card" (cdkDropListDropped)="drop($event)"
-      *ngFor="let card of cards; let i = index">
+      *ngFor="let card of cards; let cardIndex = index">
 
-      <span (click)="deleteCard(i, card.id)" class="btnDeleteCard">
+      <span (click)="deleteCard(cardIndex, card.id)" class="btnDeleteCard">
         <mat-icon color="primary">clear</mat-icon>
       </span>
 
@@ -16,19 +16,19 @@
       <div class="form-group" *ngIf="!card.name">
         <mat-form-field appearance="standard">
           <input ngDefaultControl matInput placeholder="Card Title" type="text"
-            (keyup.enter)="cardTitleAdd($event, i)" />
+            (keyup.enter)="cardTitleAdd($event, cardIndex)" />
         </mat-form-field>
       </div>
 
-      <div *ngIf="cardlist[i]">
-        <div cdkDrag [ngClass]="item.done" *ngFor="let item of card.tickets; let j = index" class="innerCard">
+      <div *ngIf="cardList[cardIndex]">
+        <div cdkDrag [ngClass]="item.done" *ngFor="let item of card.tickets; let itemIndex = index" class="innerCard">
           {{ item.cardtext }}
-          <span (click)="remove(j, i)" class="close">
+          <span (click)="remove(itemIndex, cardIndex)" class="close">
             <mat-icon color="primary">clear</mat-icon>
           </span>
-          <span (click)="done(j)"></span>
+          <span (click)="done(itemIndex)"></span>
         </div>
-        <input type="text" ngDefaultControl matInput id="cardtext" (keyup.enter)="onKey(i, $event, card)"
+        <input type="text" ngDefaultControl matInput id="cardtext" (keyup.enter)="onKey(cardIndex, $event, card)"
           placeholder="Add Card" />
       </div>
     </mat-card>

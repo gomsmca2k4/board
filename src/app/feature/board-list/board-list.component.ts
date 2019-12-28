@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, NgZone } from "@angular/core";
-import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import {
   CdkDragDrop,
   moveItemInArray,
 } from "@angular/cdk/drag-drop";
 
-import { ICard } from "../../model/IboardList";
+import { ICard } from "../../model/ICard";
+import { ITask, STATE } from "../../model/ITask";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -15,7 +15,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class BoardListComponent implements OnInit, OnDestroy {
   cardNamelist = [];
-  list = [];
+  list: Array<ITask> = [];
   boardName;
   connectedTo = [];
   constructor(
@@ -25,11 +25,10 @@ export class BoardListComponent implements OnInit, OnDestroy {
     this.boardName = this.route.snapshot.params.id;
   }
 
-  // dynamicArray: Array<DynamicDashboardGrid> = [];
   newDynamic: any = {};
   newInnerCard: any = {};
   cards: any = [];
-  cardlist: boolean[] = [];
+  cardList: boolean[] = [];
 
   ngOnInit(): void {
     this.newDynamic = { card: "" };
@@ -38,7 +37,7 @@ export class BoardListComponent implements OnInit, OnDestroy {
   getBoardList() { }
 
   cardTitleAdd(event, index) {
-    this.cardlist[index] = true;
+    this.cardList[index] = true;
     const inputValue = event.target.value;
     const obj = {
       name: inputValue,
@@ -50,10 +49,9 @@ export class BoardListComponent implements OnInit, OnDestroy {
 
   onKey(index1, event, item) {
     const inputValue = event.target.value;
-    this.list = [];
     this.list = this.cards[index1].tickets;
     this.list.push({
-      cardtext: inputValue,
+      cardText: inputValue,
       id: this.cards[index1].tickets.length + 1
     });
     this.cards[index1].tickets = [];
@@ -65,21 +63,19 @@ export class BoardListComponent implements OnInit, OnDestroy {
     }
   }
 
-  add(cardtext, event) {
-    this.list.push({ cardtext, done: "active" });
-    cardtext.value = "";
+  add(textInput, event) {
+    this.list.push({ cardText: textInput, state: STATE.ACTIVE });
+    textInput.value = "";
   }
 
-  done(idx) {
-    this.list[idx].done = this.list[idx].done === "done" ? "active" : "done";
+  done(id) {
+    this.list[id].state = this.list[id].state === STATE.DONE ? STATE.ACTIVE : STATE.DONE;
   }
 
-  remove(idx, iCard) {
-    this.list = [];
-    this.list = this.cards[iCard].tickets;
-    this.cards[iCard].tickets = [];
-    this.cards[iCard].tickets = this.list;
-    this.list.splice(idx, 1);
+  remove(id, cardIndex) {
+    this.list = this.cards[cardIndex].tickets;
+    this.cards[cardIndex].tickets = this.list;
+    this.list.splice(id, 1);
   }
 
   addCard() {
@@ -87,7 +83,7 @@ export class BoardListComponent implements OnInit, OnDestroy {
     this.ngzone.run(() => {
       const card: ICard = {
         name: "",
-        tickets: [],
+        tasks: [],
         id: 0
       };
       this.cards.push({
@@ -107,7 +103,6 @@ export class BoardListComponent implements OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<any>) {
-    console.log("event", event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         this.cards[event.container.data.id].tickets,
@@ -116,5 +111,6 @@ export class BoardListComponent implements OnInit, OnDestroy {
       );
     }
   }
+
   ngOnDestroy() { }
 }
