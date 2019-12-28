@@ -1,17 +1,15 @@
-  export interface IName {
-        name: string;
-        id: number;
-    }
+export interface IName {
+  id: number;
+  name: string;
+}
 
-  export interface ITicket {
-        cardtext: string;
-        id: number;
-    }
+export interface ITicket {
+  cardtext: string;
+  id: number;
+}
 
-  export interface ICard {
-        name: string;
-        tickets: ITicket[];
-        id: number;
-    }
-
-
+export interface ICard {
+  name: string;
+  id: number;
+  tickets: ITicket[];
+}

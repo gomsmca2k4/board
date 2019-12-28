@@ -12,35 +12,35 @@ export class TrelloCardsService {
 
   addBoard(obj) {
     console.log(obj);
-    return this.http.post(this.uri + '/names', obj);
+    return this.http.post(this.uri + "/names", obj);
   }
 
   getBoardName() {
-    return this.http.get(this.uri + '/names');
+    return this.http.get(this.uri + "/names");
   }
 
   updateBoard(id, obj) {
     console.log(obj);
-    return this.http.put(this.uri + '/names' + "/" + id, obj);
+    return this.http.put(this.uri + "/names" + "/" + id, obj);
   }
 
   getAllBoardName() {
-    return this.http.get(this.uri + '/names');
+    return this.http.get(this.uri + "/names");
   }
 
   selectBoard(id) {
-    return this.http.get(this.uri + '/names/' + id);
+    return this.http.get(this.uri + "/names/" + id);
   }
 
   deleteBoard(id) {
-    return this.http.delete(this.uri + '/names/' + id);
+    return this.http.delete(this.uri + "/names/" + id);
   }
 
   //Add card
 
   addCard(obj) {
     console.log(obj);
-    return this.http.post(this.uri + '/card', obj);
+    return this.http.post(this.uri + "/card", obj);
   }
   updateCard(id, obj) {
     console.log("id " + id);

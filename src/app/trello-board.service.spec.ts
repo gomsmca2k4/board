@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { TrelloBoardService } from './trello-board.service';
+import { TrelloBoardService } from "./trello-board.service";
 
-describe('TrelloBoardService', () => {
+describe("TrelloBoardService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  it("should be created", () => {
     const service: TrelloBoardService = TestBed.get(TrelloBoardService);
     expect(service).toBeTruthy();
   });

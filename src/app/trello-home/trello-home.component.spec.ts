@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TrelloHomeComponent } from './trello-home.component';
+import { TrelloHomeComponent } from "./trello-home.component";
 
-describe('TrelloHomeComponent', () => {
+describe("TrelloHomeComponent", () => {
   let component: TrelloHomeComponent;
   let fixture: ComponentFixture<TrelloHomeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrelloHomeComponent ]
-    })
-    .compileComponents();
+      declarations: [TrelloHomeComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('TrelloHomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

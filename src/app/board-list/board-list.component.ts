@@ -1,24 +1,29 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, OnInit, OnDestroy, NgZone } from "@angular/core";
+import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from "@angular/cdk/drag-drop";
 
-import { IName, ICard, ITicket } from './Iboardlist';
-import { ActivatedRoute } from '@angular/router';
+import { IName, ICard, ITicket } from "./Iboardlist";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-board-list',
-  templateUrl: './board-list.component.html',
-  styleUrls: ['./board-list.component.scss']
+  selector: "app-board-list",
+  templateUrl: "./board-list.component.html",
+  styleUrls: ["./board-list.component.scss"]
 })
-
 export class BoardListComponent implements OnInit, OnDestroy {
-
   cardNamelist = [];
   list = [];
   boardname;
   connectedTo = [];
-  constructor( private formbuilder: FormBuilder,
-               private route: ActivatedRoute, private ngzone: NgZone) {
+  constructor(
+    private formbuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private ngzone: NgZone
+  ) {
     this.boardname = this.route.snapshot.params.id;
   }
 
@@ -29,19 +34,18 @@ export class BoardListComponent implements OnInit, OnDestroy {
   cardlist: boolean[] = [];
 
   ngOnInit(): void {
-    this.newDynamic = { card: '' };
+    this.newDynamic = { card: "" };
   }
 
-   getBoardList() {
-  }
+  getBoardList() {}
 
   cardTitleAdd(event, index) {
     this.cardlist[index] = true;
-    const inputValue = event.target .value;
+    const inputValue = event.target.value;
     const obj = {
       name: inputValue,
       tickets: [],
-      id: index,
+      id: index
     };
     this.cards[index] = obj;
   }
@@ -50,10 +54,13 @@ export class BoardListComponent implements OnInit, OnDestroy {
     const inputValue = event.target.value;
     this.list = [];
     this.list = this.cards[index1].tickets;
-    this.list.push({ cardtext: inputValue, id: this.cards[index1].tickets.length + 1 });
+    this.list.push({
+      cardtext: inputValue,
+      id: this.cards[index1].tickets.length + 1
+    });
     this.cards[index1].tickets = [];
     this.cards[index1].tickets = this.list;
-    event.target.value = '';
+    event.target.value = "";
 
     for (const card of this.cards) {
       this.connectedTo.push(card.id);
@@ -61,12 +68,12 @@ export class BoardListComponent implements OnInit, OnDestroy {
   }
 
   add(cardtext, event) {
-    this.list.push({ cardtext, done: 'active' });
-    cardtext.value = '';
+    this.list.push({ cardtext, done: "active" });
+    cardtext.value = "";
   }
 
   done(idx) {
-    this.list[idx].done = this.list[idx].done === 'done' ? 'active' : 'done';
+    this.list[idx].done = this.list[idx].done === "done" ? "active" : "done";
   }
 
   remove(idx, iCard) {
@@ -78,18 +85,18 @@ export class BoardListComponent implements OnInit, OnDestroy {
   }
 
   addCard() {
-     this.list = [];
-     this.ngzone.run(() => {
-    const card: ICard = {
-        name: '',
+    this.list = [];
+    this.ngzone.run(() => {
+      const card: ICard = {
+        name: "",
         tickets: [],
         id: 0
       };
-    this.cards.push({
+      this.cards.push({
         card
-       });
-});
-     return true;
+      });
+    });
+    return true;
   }
 
   deleteCard(index, id) {
@@ -101,13 +108,15 @@ export class BoardListComponent implements OnInit, OnDestroy {
     }
   }
 
-drop(event: CdkDragDrop<any>) {
-  console.log('event', event);
-  if (event.previousContainer === event.container) {
-      moveItemInArray(this.cards[event.container.data.id].tickets, event.previousIndex, event.currentIndex);
-    } 
+  drop(event: CdkDragDrop<any>) {
+    console.log("event", event);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        this.cards[event.container.data.id].tickets,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
-  ngOnDestroy() {
- 
-  }
+  ngOnDestroy() {}
 }
